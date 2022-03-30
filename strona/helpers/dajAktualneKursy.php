@@ -20,7 +20,22 @@ while($x = mysqli_fetch_row($result)) {
     $kursy[$i]["tabela"] = $x[1];
     $kursy[$i]["data"] = $x[2];
     $kursy[$i]["kod_waluty"] = $x[3];
-    $kursy[$i]["kurs"] = $x[4];
+    $kurs = floatval($x[4]);
+    $mnoznik = 1;
+    if($kurs >= 1.0)
+    $kursy[$i]["kurs"] = $kurs;
+    else {
+        while(floatval($kurs) < 1.0) {
+            $kurs *= 10;
+            $mnoznik *=10;
+        }
+        $kursy[$i]["kurs"] = strval($kurs);
+    }
+    $kursy[$i]["nominal"] = strval($mnoznik)." ".$x[3];
+    
+
+    $kursy[$i]["kurs"] = str_replace(".", "," , strval($kursy[$i]["kurs"]));
+    
     $kursy[$i]["nazwa"] = $x[5];
     $i++;
 }
