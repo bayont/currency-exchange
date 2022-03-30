@@ -91,12 +91,8 @@ aktualnaTabela = RequestNaTabele("https://api.nbp.pl/api/exchangerates/tables/a/
 
 
 
-
-
 tabele = RequestNaTabele(baza.query)
-print(tabele[0].rates)
 
-    
 
 baza.createTable("kursy", "(id int NOT NULL AUTO_INCREMENT PRIMARY KEY, nr_tabeli VARCHAR(14), data DATE, kod_waluty VARCHAR(3), kurs FLOAT, nazwa VARCHAR(100));")
 baza.createTable("kursUSD", "(id int NOT NULL AUTO_INCREMENT PRIMARY KEY, nr_tabeli VARCHAR(14), data DATE, kurs FLOAT);")
