@@ -22,10 +22,10 @@ while($x = mysqli_fetch_row($result)) {
     $kursy[$i]["kod_waluty"] = $x[3];
     $kurs = floatval($x[4]);
     $mnoznik = 1;
-    if($kurs >= 1.0)
+    if($kurs >= 0.1)
     $kursy[$i]["kurs"] = $kurs;
     else {
-        while(floatval($kurs) < 1.0) {
+        while(floatval($kurs) < 0.1) {
             $kurs *= 10;
             $mnoznik *=10;
         }

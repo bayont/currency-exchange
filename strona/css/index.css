@@ -1,7 +1,3 @@
-body {
-  background-color: #fefefe;
-}
-
 .container {
   display: flex;
   flex-direction: column;
@@ -21,15 +17,51 @@ header {
   width: 80px;
   text-align: center;
   margin-left: auto;
-  padding: 10px 20px;
+  padding: 7px 15px;
   border-radius: 8px;
   text-decoration: none !important;
+  transition: all 0.2s ease-in-out;
 }
 
+.kurs:hover {
+  background-color: rgb(120, 183, 241);
+}
+
+.tableContainer {
+  align-self: center;
+  display: flex;
+
+  padding: 50px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 2px 7px 2px #ccc;
+}
 table {
-  width: 80vw;
+  width: 60vw;
   align-self: center;
   border-radius: 22px;
+}
+
+@media screen and (max-width: 1200px) {
+  table {
+    width: 80vw;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  table {
+    width: 100vw;
+  }
+
+  .kurs {
+    font-size: 15px;
+  }
+  .tableContainer {
+    align-self: center;
+    display: flex;
+    border: none;
+    padding: 0;
+  }
 }
 
 th {
@@ -58,4 +90,12 @@ th {
 .icons {
   width: 20px;
   padding: 5px;
+}
+
+.nazwa {
+  font-weight: 500;
+}
+
+.nazwa a:hover {
+  color: rgb(82, 168, 238);
 }

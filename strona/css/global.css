@@ -4,14 +4,41 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Open Sans", sans-serif;
+  background-color: #f7f7f7;
+  color: #222;
 }
 a {
   text-decoration: none;
-  color: black;
+  color: #222;
+  transition: all 0.3s ease-in-out;
 }
 a:link {
   text-decoration: none;
 }
 .small {
   font-size: smaller;
+}
+
+footer {
+  margin-top: 4vh;
+}
+
+span {
+  vertical-align: middle;
+}
+
+h2 > span {
+  font-size: 2.5em;
+}
+
+.md-18 {
+  font-size: 18px;
+}
+
+.md-27 {
+  font-size: 27px;
+}
+
+.md-32 {
+  font-size: 32px;
 }

@@ -5,14 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" href="./css/global.css">
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/nav.css">
+  
+   
   
   </head>
   <body>
     <nav>
       <div class="logo">
+      <span class="material-icons-round">
+      account_balance
+      </span>
         Kantorek
       </div>
       <div class="options">
@@ -30,9 +36,12 @@
         include_once("./helpers/dajAktualneKursy.php");
     ?>
     <header>
-        <h2>Tabela <i><?php echo $tabela; ?> </i></h2>
-        <h3>z dnia <?php echo $data; ?></h3>
+        <h2> <?php echo $tabela; ?> </h2>
+        <h3><span class="material-icons-round">
+      today
+      </span> <?php echo $data; ?></h3>
     </header>
+    <section class="tableContainer">
     <table>
         <tr>
             <th>#</th>
@@ -53,7 +62,7 @@
             echo "<tr>";
             echo "<td>".$i."</td>";
             echo "<td class='icons'>".$flaga."</td>";
-            echo "<td class='align-left'>".$kurs['nazwa']."</td>";
+            echo "<td class='align-left nazwa'>".'<a href="kurs.php?waluta='.$kurs["kod_waluty"].'">'.$kurs['nazwa']."</a></td>";
            
 
             echo '<td class="align-right">'.'<a href="kurs.php?waluta='.$kurs["kod_waluty"].'"><div class="kurs"> '.$kurs['nominal'].'</div></a>'.'</td>';
@@ -68,7 +77,9 @@
             $i++;
         }
         ?>
+        </table>
         
         </div>
+        <footer></footer>
   </body>
 </html>

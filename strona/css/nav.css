@@ -1,15 +1,33 @@
 nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+  background-color: #fefefe;
+  box-shadow: 0px 1px 7px 1px #ccc;
 }
 
 .logo {
   font-size: 20px;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.logo > span {
+  font-size: 32px;
+  margin-right: 5px;
+  font-weight: normal;
+  color: rgb(11, 134, 235);
 }
 .options {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   text-align: right;
   width: 35%;
+}
+.menuOption {
+  margin: 0 15px;
 }
