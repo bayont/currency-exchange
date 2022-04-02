@@ -14,7 +14,7 @@ $flaga = '<picture>
   <img
     src="https://flagcdn.com/24x18/'.$kraj.'.png"
     width="24"
-    height="18"
+    height="18">
 </picture>';
 
 ?>

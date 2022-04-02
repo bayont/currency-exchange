@@ -6,14 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $_GET["waluta"]; ?>/PLN - kurs</title>
     <script src="./chart.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="./css/global.css">
+    <link rel="stylesheet" href="./css/kurs.css">
+    <link rel="stylesheet" href="./css/nav.css">
 </head>
 <body>
+            
 <?php
 $waluta = $_GET["waluta"];
 include("./helpers/dajKursy.php");
+if($waluta != "XDR"){
+    $kraj = strtolower(substr($waluta, 0, 2));
+    include("./helpers/dajFlage.php");
+    }
+    else $flaga="";
 ?>
-<h1>Kurs <?php echo $waluta ?>/PLN</h1>
-<h2><?php echo $kursy[0]['nazwa'] ?></h2>
+<nav>
+    
+      <div class="logo">
+      <span class="material-icons-round">
+      account_balance
+      </span>
+        Kantorek
+      </div>
+      <div class="options">
+      <div class="menuOption">
+      <a href="kalkulator.php">Kalkulator walut</a>
+      </div>
+      <div class="menuOption">
+      <a href="kursZDnia.php">Kurs z dnia</a>
+      </div>
+      </div>
+    </nav>
+
+
+<div class="container">
+
+<div class="inner-container">
+<div class="left">
+    <div class="kurs">
+<h1>Kurs <span class="para"><?php echo $waluta ?>/PLN</span></h1>
+<h2><?php echo $flaga." ".$kursy[0]['nazwa'] ?></h2>
 <h1 style=<?php
                     $il_kursow = count($kursy);
                     if($il_kursow > 1)
@@ -30,15 +64,30 @@ include("./helpers/dajKursy.php");
                         echo "'color: rgba(54, 162, 235, 1.0)', ";
                     }
                 ?>><?php echo str_replace(".", ",", $kursy[count($kursy)-1]['kurs']) ?> zł</h1>
-<div width="100" height="100">
+<div class="wykresContainer">
 <canvas id="wykresWaluty" width="100" height="100"></canvas>
-<style>
-    #wykresWaluty {
-        max-width: 30rem;
-        max-height: 20rem;
-    }
-</style>
 </div>
+</div>
+</div>
+<div class="right">
+    <h1>Sprawdź inne waluty</h1>
+    <div class="scrollable">
+    <?php
+            include("./helpers/dajWaluty.php");
+            foreach($waluty as $wal) {
+                list($kod, $nazwa, $flaga) = $wal;
+                echo "<a class='kursAnchor' href='kurs.php?waluta=$kod'><div class='item'><div class='flaga'>$flaga</div> <div class='nazwa'>$nazwa<div class='small'>$kod</div></div></div></a>";
+            }
+    ?>
+    </div>
+</div>
+</div>
+</div>
+
+
+
+
+
 
 <script>
 let ctx = document.querySelector("#wykresWaluty").getContext('2d');

@@ -1,0 +1,97 @@
+.inner-container {
+  align-self: center;
+  display: flex;
+  width: 60%;
+  padding: 20px 50px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 2px 7px 2px #ccc;
+  transition: width 0.5s;
+}
+
+.inner-container .left {
+  width: 60%;
+}
+.inner-container .right {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+.scrollable {
+  overflow-y: scroll;
+  background-color: #fefefe;
+  color: #333;
+  padding: 20px;
+  max-height: 500px;
+  border-radius: 20px;
+  width: 100%;
+}
+.scrollable::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
+  position: absolute;
+  left: 5px;
+  border-radius: 10px;
+}
+
+.scrollable::-webkit-scrollbar {
+  width: 10px;
+  background-color: #f5f5f5;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgb(11, 134, 235);
+}
+
+.kurs {
+  max-width: 500px;
+}
+.para {
+  color: rgb(11, 134, 235);
+}
+
+.wykresContainer {
+  width: 90%;
+}
+
+.item {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  align-items: center;
+  border-bottom: 1px solid #aaa;
+  transition: transform 0.5s;
+}
+.kursAnchor:hover > .item {
+  transform: translateX(-20px);
+}
+.nazwa {
+  font-size: 16px;
+  margin-left: 20px;
+  font-weight: 400;
+}
+.small {
+  font-size: 14px;
+  font-weight: 300;
+}
+
+@media screen and (max-width: 800px) {
+  .wykresContainer {
+    width: 100%;
+  }
+  .inner-container {
+    flex-direction: column;
+    width: 80%;
+    justify-content: center;
+  }
+  .inner-container .left,
+  .inner-container .right {
+    width: 100%;
+    text-align: center;
+  }
+}

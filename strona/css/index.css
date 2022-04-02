@@ -1,10 +1,3 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
-  margin-top: 15px;
-}
-
 header {
   display: flex;
   flex-direction: column;
@@ -15,10 +8,9 @@ h5 {
   margin: 15px;
 }
 
-.kurs {
+.nominal {
   background-color: rgb(82, 168, 238);
   color: white;
-  min-width: 50px;
   width: 80px;
   text-align: center;
   margin-left: auto;
@@ -28,45 +20,24 @@ h5 {
   transition: all 0.2s ease-in-out;
 }
 
-.kurs:hover {
+.nominal:hover {
   background-color: rgb(120, 183, 241);
 }
 
 .tableContainer {
   align-self: center;
   display: flex;
-
+  width: 60%;
   padding: 50px;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0px 2px 7px 2px #ccc;
+  transition: width 0.5s;
 }
 table {
-  width: 60vw;
+  width: 100%;
   align-self: center;
   border-radius: 22px;
-}
-
-@media screen and (max-width: 1200px) {
-  table {
-    width: 80vw;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  table {
-    width: 100vw;
-  }
-
-  .kurs {
-    font-size: 15px;
-  }
-  .tableContainer {
-    align-self: center;
-    display: flex;
-    border: none;
-    padding: 0;
-  }
 }
 
 th {
@@ -112,6 +83,7 @@ th {
 .zmiana {
   padding: 8px;
   padding-right: 6px;
+  padding-top: 6px;
   width: fit-content;
   margin-left: auto;
   color: white;
@@ -129,4 +101,49 @@ th {
 }
 .change-down {
   background-color: rgb(250, 115, 126);
+}
+
+.kurs {
+  font-weight: 600;
+}
+
+@media screen and (max-width: 1200px) {
+  .tableContainer {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .tableContainer {
+    width: 100%;
+    font-size: 12px;
+  }
+
+  .nominal {
+    font-size: 11px;
+    width: 50px;
+    padding: 3px 7px;
+  }
+  .lp {
+    display: none;
+  }
+  .tableContainer {
+    align-self: center;
+    display: flex;
+    border: none;
+    padding: 0;
+  }
+
+  .kurs {
+    font-size: 12px;
+  }
+  .zmiana {
+    font-size: 8px;
+    padding: 4px;
+    padding-right: 3px;
+    padding-top: 3px;
+  }
+  .nazwa {
+    font-size: 10px;
+  }
 }

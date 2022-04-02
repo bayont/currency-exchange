@@ -23,12 +23,17 @@ footer {
   margin-top: 4vh;
 }
 
-span {
+.material-icons,
+.material-icons-round {
   vertical-align: middle;
 }
 
 h2 > span {
   font-size: 2.5em;
+}
+
+.md-12 {
+  font-size: 12px;
 }
 
 .md-18 {
@@ -41,4 +46,16 @@ h2 > span {
 
 .md-32 {
   font-size: 32px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  margin-top: 15px;
+}
+
+.flaga {
+  width: 24px;
+  height: 18px;
 }

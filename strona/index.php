@@ -44,7 +44,7 @@
     <section class="tableContainer">
     <table>
         <tr>
-            <th>#</th>
+            <th class='lp'>#</th>
             <th class='icons'></th> 
             <th class='align-left'>Nazwa waluty<div class="small">(państwo)</div></th>
             
@@ -63,14 +63,14 @@
             else $flaga="";
         
             echo "<tr>";
-            echo "<td>".$i."</td>";
+            echo "<td class='lp'>".$i."</td>";
             echo "<td class='icons'>".$flaga."</td>";
             echo "<td class='align-left nazwa'>".'<a href="kurs.php?waluta='.$kurs["kod_waluty"].'">'.$kurs['nazwa']."</a></td>";
            
             
-            echo '<td class="align-right">'.'<a href="kurs.php?waluta='.$kurs["kod_waluty"].'"><div class="kurs"> '.$kurs['nominal'].'</div></a>'.'</td>';
+            echo '<td class="align-right">'.'<a href="kurs.php?waluta='.$kurs["kod_waluty"].'"><div class="nominal"> '.$kurs['nominal'].'</div></a>'.'</td>';
             
-            echo "<td class='align-right'>".$kurs['kurs']. " zł"."</td>";
+            echo "<td class='align-right kurs'>".$kurs['kurs']. " zł"."</td>";
 
             $zmiana = $kurs['zmiana'];
             $klasaZmiany = "";
@@ -81,10 +81,12 @@
             else {
             if($zmiana >= 0) {
                 $klasaZmiany = "change-up";
+                $icon = "keyboard_arrow_up";
             }
             else {
               $zmiana = abs($zmiana);
               $klasaZmiany = "change-down";
+              $icon = "keyboard_arrow_down";
             }
               $zmiana *= 100;
               $zmiana = str_replace(".", ",",strval(round($zmiana,2)));
@@ -96,11 +98,12 @@
           }
           if($zmiana == "0,00") {
             $klasaZmiany = "unchanged";
+            $icon = "remove";
           }
 
             
   
-            echo "<td class='align-right'><div class='zmiana ".$klasaZmiany."'>".$zmiana."%</div></td>";
+            echo "<td class='align-right'><div class='zmiana ".$klasaZmiany."'><span class='md-18 material-icons-round arrow'>".$icon."</span>".$zmiana."%</div></td>";
             
             
             

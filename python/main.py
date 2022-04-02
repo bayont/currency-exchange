@@ -101,7 +101,7 @@ baza.createTable("kursEUR", "(id int NOT NULL AUTO_INCREMENT PRIMARY KEY, nr_tab
 
 
 if len(baza.queryDB(f'SELECT * FROM kursy WHERE nr_tabeli = "{aktualnaTabela.no}"')) > 0:
-    print("Mamy już zassaną tabelkę z dzisiaj!")
+    print("Mamy już zassaną aktualną tabelkę!")
     quit()
 
 
