@@ -23,6 +23,24 @@ nav {
   font-weight: normal;
   color: rgb(11, 134, 235);
 }
+.logo:hover {
+  animation: shake 1s ease;
+}
+
+@keyframes shake {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
 .options {
   display: flex;
   justify-content: center;
@@ -31,6 +49,11 @@ nav {
 }
 .menuOption {
   margin: 0 15px;
+  transition: all 0.5s;
+}
+
+.menuOption:hover {
+  color: rgb(11, 134, 235);
 }
 
 @media screen and (max-width: 800px) {

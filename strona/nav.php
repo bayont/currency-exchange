@@ -12,7 +12,7 @@
     <a href="kalkulator.php">Kalkulator walut</a>
     </div>
     <div class="menuOption">
-    <a href="kursZDnia.php">Kurs z dnia</a>
+    <a href="archiwum.php">Archiwum kursów</a>
     </div>
     </div>
   </nav>
