@@ -5,9 +5,18 @@ if(mysqli_connect_errno()) {
     echo "Nie udało się połączyć z bazą danych.";
     exit();
 }
-$q = "SELECT data FROM kursy ORDER BY data DESC LIMIT 1;";
+$q = "SELECT DISTINCT data FROM kursy ORDER BY data DESC LIMIT 2;";
 $result = mysqli_query($conn, $q);
 $data = mysqli_fetch_row($result)[0];
+$data_zeszla = mysqli_fetch_row($result)[0];
+$q = 'SELECT * FROM kursy WHERE data = "'.$data_zeszla.'";';
+$result = mysqli_query($conn, $q);
+$k_zeszle = array();
+while($x = mysqli_fetch_row($result)) {
+    $k_zeszle[$x[3]] = floatval($x[4]);
+}
+
+
 $q = 'SELECT * FROM kursy WHERE data = "'.$data.'";';
 $result = mysqli_query($conn, $q);
 $kursy = array();
@@ -22,6 +31,7 @@ while($x = mysqli_fetch_row($result)) {
     $kursy[$i]["kod_waluty"] = $x[3];
     $kurs = floatval($x[4]);
     $mnoznik = 1;
+    $kursy[$i]["zmiana"] = $kurs/floatval($k_zeszle[$kursy[$i]["kod_waluty"]]);
     if($kurs >= 0.1)
     $kursy[$i]["kurs"] = $kurs;
     else {

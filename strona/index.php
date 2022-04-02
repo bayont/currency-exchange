@@ -36,10 +36,10 @@
         include_once("./helpers/dajAktualneKursy.php");
     ?>
     <header>
-        <h2> <?php echo $tabela; ?> </h2>
-        <h3><span class="material-icons-round">
+        <h1>Aktualne kursy</h1>
+        <h5> <span class="md-18 material-icons-round">
       today
-      </span> <?php echo $data; ?></h3>
+      </span> <span class="data"><?php echo $data; ?></span><span class="tabela"><?php echo $tabela; ?></span></h5>
     </header>
     <section class="tableContainer">
     <table>
@@ -47,8 +47,10 @@
             <th>#</th>
             <th class='icons'></th> 
             <th class='align-left'>Nazwa waluty<div class="small">(państwo)</div></th>
+            
             <th class='align-right'>Nominał <div class="small">Kliknij, aby pokazać wykres</div></th>
             <th class='align-right'>Kurs</th>
+            <th class='align-right change'>Zmiana (%)</th>
             
         </tr>
         <?php
@@ -59,19 +61,48 @@
             include("./helpers/dajFlage.php");
             }
             else $flaga="";
+        
             echo "<tr>";
             echo "<td>".$i."</td>";
             echo "<td class='icons'>".$flaga."</td>";
             echo "<td class='align-left nazwa'>".'<a href="kurs.php?waluta='.$kurs["kod_waluty"].'">'.$kurs['nazwa']."</a></td>";
            
-
+            
             echo '<td class="align-right">'.'<a href="kurs.php?waluta='.$kurs["kod_waluty"].'"><div class="kurs"> '.$kurs['nominal'].'</div></a>'.'</td>';
-
+            
             echo "<td class='align-right'>".$kurs['kurs']. " zł"."</td>";
+
+            $zmiana = $kurs['zmiana'];
+            $klasaZmiany = "";
+            $zmiana -= 1.0;
+            if($zmiana == 0.0) {
+              $zmiana = '0,00';
+            }
+            else {
+            if($zmiana >= 0) {
+                $klasaZmiany = "change-up";
+            }
+            else {
+              $zmiana = abs($zmiana);
+              $klasaZmiany = "change-down";
+            }
+              $zmiana *= 100;
+              $zmiana = str_replace(".", ",",strval(round($zmiana,2)));
+              $ex = explode(',', "$zmiana,");
+              if(count($ex) > 1)
+              $zmiana = $ex[0].','.str_pad($ex[1], 2, '0', STR_PAD_RIGHT);
+              else 
+              $zmiana = $ex[0];
+          }
+          if($zmiana == "0,00") {
+            $klasaZmiany = "unchanged";
+          }
+
+            
+  
+            echo "<td class='align-right'><div class='zmiana ".$klasaZmiany."'>".$zmiana."%</div></td>";
             
             
-            
-           
             
             echo "</tr>";
             $i++;

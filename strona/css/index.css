@@ -2,12 +2,17 @@
   display: flex;
   flex-direction: column;
   justify-content: stretch;
+  margin-top: 15px;
 }
 
 header {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+h1,
+h5 {
+  margin: 15px;
 }
 
 .kurs {
@@ -98,4 +103,30 @@ th {
 
 .nazwa a:hover {
   color: rgb(82, 168, 238);
+}
+
+.tabela {
+  margin-left: 50px;
+}
+
+.zmiana {
+  padding: 8px;
+  padding-right: 6px;
+  width: fit-content;
+  margin-left: auto;
+  color: white;
+  font-size: 12px;
+  border-radius: 5px;
+  width: 50px;
+  text-align: center;
+}
+
+.unchanged {
+  background-color: gray;
+}
+.change-up {
+  background-color: rgb(99, 194, 61);
+}
+.change-down {
+  background-color: rgb(250, 115, 126);
 }
