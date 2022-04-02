@@ -30,6 +30,7 @@ while($x = mysqli_fetch_row($result)) {
     $kursy[$i]["data"] = $x[2];
     $kursy[$i]["kod_waluty"] = $x[3];
     $kurs = floatval($x[4]);
+    $kursy[$i]["kurs_raw"] = $kurs;
     $mnoznik = 1;
     $kursy[$i]["zmiana"] = $kurs/floatval($k_zeszle[$kursy[$i]["kod_waluty"]]);
     if($kurs >= 0.1)

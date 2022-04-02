@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Kantorek - Fabian Fetter</title>
     <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" href="./css/global.css">
     <link rel="stylesheet" href="./css/index.css">
@@ -14,22 +14,7 @@
   
   </head>
   <body>
-    <nav>
-      <div class="logo">
-      <span class="material-icons-round">
-      account_balance
-      </span>
-        Kantorek
-      </div>
-      <div class="options">
-      <div class="menuOption">
-      <a href="kalkulator.php">Kalkulator walut</a>
-      </div>
-      <div class="menuOption">
-      <a href="kursZDnia.php">Kurs z dnia</a>
-      </div>
-      </div>
-    </nav>
+  <?php include("./nav.php"); ?>
 
     <div class="container">
     <?php

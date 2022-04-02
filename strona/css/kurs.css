@@ -7,10 +7,13 @@
   border-radius: 10px;
   box-shadow: 0px 2px 7px 2px #ccc;
   transition: width 0.5s;
+  justify-content: center;
 }
 
 .inner-container .left {
   width: 60%;
+  display: flex;
+  justify-content: flex-start;
 }
 .inner-container .right {
   width: 40%;
@@ -46,15 +49,21 @@
   background-color: rgb(11, 134, 235);
 }
 
+.scrollable::-webkit-scrollbar-thumb:active {
+  border-radius: 10px;
+  background-color: rgb(106, 181, 241);
+}
+
 .kurs {
-  max-width: 500px;
+  width: 100%;
 }
 .para {
   color: rgb(11, 134, 235);
 }
 
 .wykresContainer {
-  width: 90%;
+  width: 80%;
+  max-width: 600px;
 }
 
 .item {
@@ -74,24 +83,32 @@
   font-size: 16px;
   margin-left: 20px;
   font-weight: 400;
+  text-align: right;
 }
 .small {
   font-size: 14px;
   font-weight: 300;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1000px) {
   .wykresContainer {
     width: 100%;
+    margin: 0 auto;
   }
   .inner-container {
     flex-direction: column;
-    width: 80%;
+    width: 90%;
     justify-content: center;
   }
   .inner-container .left,
   .inner-container .right {
     width: 100%;
     text-align: center;
+  }
+}
+
+@media screen and (max-width: 1350px) {
+  .inner-container {
+    width: 80%;
   }
 }

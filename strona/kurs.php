@@ -22,23 +22,7 @@ if($waluta != "XDR"){
     }
     else $flaga="";
 ?>
-<nav>
-    
-      <div class="logo">
-      <span class="material-icons-round">
-      account_balance
-      </span>
-        Kantorek
-      </div>
-      <div class="options">
-      <div class="menuOption">
-      <a href="kalkulator.php">Kalkulator walut</a>
-      </div>
-      <div class="menuOption">
-      <a href="kursZDnia.php">Kurs z dnia</a>
-      </div>
-      </div>
-    </nav>
+<?php include("./nav.php"); ?>
 
 
 <div class="container">
@@ -70,7 +54,7 @@ if($waluta != "XDR"){
 </div>
 </div>
 <div class="right">
-    <h1>Sprawdź inne waluty</h1>
+    <h2>Sprawdź inne wykresy</h2>
     <div class="scrollable">
     <?php
             include("./helpers/dajWaluty.php");
