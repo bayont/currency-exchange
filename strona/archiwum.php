@@ -50,7 +50,7 @@
             </ul>
 
         </div>
-        <div class="currencyPicker picker">
+        <div class="currencyPicker picker scrollable">
             <ul>
                 <?php
                 foreach($waluty as $wal) {
