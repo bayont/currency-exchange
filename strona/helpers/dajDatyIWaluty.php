@@ -21,11 +21,19 @@ $i = 0;
 $waluty = array();
 
 while($x = mysqli_fetch_row($result)) {
-    $waluty[$i] = array();
-    $waluty[$i]['kod'] = $x[0];
-    $waluty[$i]['nazwa'] = $x[1];
-    $i++;
+    $waluty[$x[0]] = array();
+    $waluty[$x[0]][0] = $x[0];
+    $waluty[$x[0]][1] = $x[1];
+    if($x[0] != "XDR"){
+        $kraj = strtolower(substr($x[0], 0, 2));
+        include("./helpers/dajFlage.php");
+        $waluty[$x[0]][2] = $flaga;
+    }
+    else {
+        $waluty[$x[0]][2] = '';
+    }
 }
+
 
 
 

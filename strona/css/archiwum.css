@@ -10,32 +10,113 @@
   transition: width 0.5s;
   justify-content: space-around;
 }
-input[type="submit"] {
-  cursor: pointer;
-  background-color: rgb(82, 168, 238);
-  transition: all 0.5s;
-  color: white;
-}
-input[type="submit"]:hover {
-  background-color: rgb(141, 194, 238);
-}
-.flex {
+.content {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
 }
-select,
-input,
-option {
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  outline: none;
-  background-color: #f1f1f1;
+.center {
+  text-align: center;
 }
 
-.center {
+.outputBox {
+  width: 40%;
   display: flex;
-  text-align: center;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
+}
+
+.item {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  align-items: center;
+  border-bottom: 1px solid #aaa;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.item.data {
+  justify-content: center;
+}
+
+ul {
+  padding: 0;
+}
+.kursAnchor:hover > .item {
+  transform: translateX(-20px);
+}
+.nazwa {
+  font-size: 16px;
+  margin-left: 20px;
+  font-weight: 400;
+  text-align: right;
+}
+.small {
+  font-size: 14px;
+  font-weight: 300;
+}
+.pickers {
+  width: 60%;
+  display: flex;
+  justify-content: stretch;
+}
+
+.picker {
+  max-height: 70vh;
+  overflow-y: scroll;
+  flex: 1;
+  margin: 0 10px;
+}
+.datePicker {
+  overflow-y: hidden;
+}
+
+.currencyPicker {
+  flex-grow: 2;
+}
+
+.data {
+  text-align: center;
+}
+
+form {
+  display: contents;
+}
+input:checked + label {
+  background-color: rgb(14, 147, 255);
+  color: #fff;
+}
+input[type="radio"] {
+  display: block;
+  appearance: none;
+  position: absolute;
+}
+
+@media screen and (max-width: 1000px) {
+  .content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
+  .outputBox {
+    width: 100%;
+  }
+
+  .pickers {
+    width: 100%;
+  }
+
+  .inner-container {
+    width: 90%;
+    padding: 10px;
+  }
+}
+.none {
+  display: none;
 }

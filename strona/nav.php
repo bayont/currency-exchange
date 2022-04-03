@@ -1,3 +1,4 @@
+
 <nav>
     <a href="./">
     <div class="logo">
@@ -9,10 +10,14 @@
     </a>
     <div class="options">
     <div class="menuOption">
-    <a href="kalkulator.php">Kalkulator walut</a>
+    <a class="menuItem" href="kalkulator.php">
+    <span class="material-icons-round nav-icon">calculate</span>  
+    Kalkulator walut</a>
     </div>
-    <div class="menuOption">
-    <a href="archiwum.php">Archiwum kursów</a>
+    <div class="menuOption archiwum">
+    <a class="menuItem" href="archiwum.php">
+    <span class="material-icons-round nav-icon">event</span>
+    Archiwum kursów</a>
     </div>
     </div>
   </nav>

@@ -26,7 +26,8 @@
     echo "<script>";
     echo "const waluty = [";
     foreach($waluty as $waluta) {
-        echo "{kod: '".$waluta['kod']."', nazwa: '".$waluta['nazwa']."'}, ";
+        list($kod, $nazwa, $flaga) = $waluta;
+        echo "{kod: '".$kod."', nazwa: '".$nazwa."'}, ";
     }
 
     echo "];";

@@ -27,7 +27,11 @@ while($x = mysqli_fetch_row($result)) {
     $kursy[$i]["tabela"] = $x[1];
     $kursy[$i]["data"] = $x[2];
     $kursy[$i]["kod_waluty"] = $x[3];
-    $kursy[$i]["kurs"] = $x[4];
+    $kurs = floatval($x[4]);
+    $kursy[$i]["kurs_raw"] = $kurs;
+    $kursy[$i]["kurs"] = $kurs;
+    $kursy[$i]["kurs"] = str_replace(".", "," , strval($kursy[$i]["kurs"]));
+    
     $kursy[$i]["nazwa"] = $x[5];
     $i++;
 }
