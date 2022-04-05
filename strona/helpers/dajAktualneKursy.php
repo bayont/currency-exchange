@@ -1,9 +1,11 @@
 <?php
 
-$conn = mysqli_connect("localhost", "root", "", "kantorek");
+$conn = mysqli_connect("localhost", "root", "", "kantorek_fetter");
 if(mysqli_connect_errno()) {
+    include("DBerror.php");
     echo "Nie udało się połączyć z bazą danych.";
     exit();
+
 }
 $q = "SELECT DISTINCT data FROM kursy ORDER BY data DESC LIMIT 2;";
 $result = mysqli_query($conn, $q);

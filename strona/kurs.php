@@ -35,10 +35,10 @@ if($waluta != "XDR"){
 <h1 style=<?php
                     $il_kursow = count($kursy);
                     if($il_kursow > 1)
-                        if($kursy[count($kursy)-1]['kurs'] > $kursy[count($kursy)-2]['kurs']) {
+                        if($kursy[count($kursy)-1]['kurs_raw'] > $kursy[count($kursy)-2]['kurs_raw']) {
                             echo "'color: rgba(20, 185, 20, 1.0)', ";
                         }
-                        else if ($kursy[count($kursy)-1]['kurs'] == $kursy[count($kursy)-2]['kurs']) {
+                        else if ($kursy[count($kursy)-1]['kurs_raw'] == $kursy[count($kursy)-2]['kurs_raw']) {
                             echo "'color: rgba(54, 162, 235, 1.0)', ";
                         }
                         else {
@@ -47,7 +47,7 @@ if($waluta != "XDR"){
                     else {
                         echo "'color: rgba(54, 162, 235, 1.0)', ";
                     }
-                ?>><?php echo str_replace(".", ",", $kursy[count($kursy)-1]['kurs']) ?> zł</h1>
+                ?>><?php echo str_replace(".", ",", $kursy[count($kursy)-1]['kurs_raw']) ?> zł</h1>
 <div class="wykresContainer">
 <canvas id="wykresWaluty" width="100" height="100"></canvas>
 </div>
@@ -94,7 +94,7 @@ let wykres = new Chart(ctx, {
                 <?php
                 $out_str = "";
                 foreach($kursy as $kurs) {
-                    $out_str =  $out_str.$kurs['kurs'].", ";
+                    $out_str =  $out_str.$kurs['kurs_raw'].", ";
                 }
                 $out_str = substr($out_str, 0, strlen($out_str)-2);
                 echo $out_str;
@@ -108,10 +108,10 @@ let wykres = new Chart(ctx, {
                 <?php
                     $il_kursow = count($kursy);
                     if($il_kursow > 1)
-                        if($kursy[count($kursy)-1]['kurs'] > $kursy[count($kursy)-2]['kurs']) {
+                        if($kursy[count($kursy)-1]['kurs_raw'] > $kursy[count($kursy)-2]['kurs_raw']) {
                             echo "'rgba(20, 185, 20, 1.0)', ";
                         }
-                        else if ($kursy[count($kursy)-1]['kurs'] == $kursy[count($kursy)-2]['kurs']) {
+                        else if ($kursy[count($kursy)-1]['kurs_raw'] == $kursy[count($kursy)-2]['kurs_raw']) {
                             echo "'rgba(54, 162, 235, 1.0)', ";
                         }
                         else {

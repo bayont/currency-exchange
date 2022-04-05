@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="./css/global.css">
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/nav.css">
-  
+    <?php
+        include_once("./helpers/dajAktualneKursy.php");
+    ?>
    
   
   </head>
@@ -17,9 +19,7 @@
   <?php include("./nav.php"); ?>
 
     <div class="container">
-    <?php
-        include_once("./helpers/dajAktualneKursy.php");
-    ?>
+
     <header>
         <h1>Aktualne kursy</h1>
         <h5> <span class="md-18 material-icons-round">

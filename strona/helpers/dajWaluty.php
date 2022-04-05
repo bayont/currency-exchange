@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "kantorek");
+$conn = mysqli_connect("localhost", "root", "", "kantorek_fetter");
 if(mysqli_connect_errno()) {
     echo "Nie udało się połączyć z bazą danych.";
     exit();

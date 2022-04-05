@@ -53,7 +53,7 @@ class Baza:
 
 
 baza = Baza("localhost", "root", "")
-baza.selectDB("kantorek")
+baza.selectDB("kantorek_fetter")
 
 class Rate:
     currency=""
