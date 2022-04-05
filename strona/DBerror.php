@@ -22,13 +22,12 @@
         border-radius: 5px;
         box-shadow: 0px 2px 6px 2px #ddd;
     }
-    a {
+    span {
         color: red;
-        text-decoration: underline;
     }
 </style>
 <div class="errorBg"></div>
 <div class="errorPopup">
     <h3>Nie znaleziono bazy danych <i>kantorek_fetter</i></h3>
-    <p>Uruchom <a href="../python/main.py">skrypt pythonowy</a> aby zainicjalizować bazę danych, pobrać aktualne kursy z NBP i umieścić te danie w bazie. Po tej czynności strona wyświetli się prawidłowo.</p>
+    <p>Uruchom <span>skrypt main.py</span> aby zainicjalizować bazę danych, pobrać aktualne kursy z NBP i umieścić te danie w bazie. Po tej czynności strona wyświetli się prawidłowo.</p>
 </div>

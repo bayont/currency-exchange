@@ -1,6 +1,14 @@
 <?php
 
+try {
 $conn = mysqli_connect("localhost", "root", "", "kantorek_fetter");
+}
+catch(mysqli_sql_exception $e) {
+    include("DBerror.php");
+    echo "Nie udało się połączyć z bazą danych.".$e;
+    exit();
+}
+
 if(mysqli_connect_errno()) {
     include("DBerror.php");
     echo "Nie udało się połączyć z bazą danych.";
