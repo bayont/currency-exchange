@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/kurs.css" />
+    <link rel="stylesheet" href="../css/nav.css" />
+    <script src="../chart.min.js"></script>
+    <script type="module" src="../flaga/flaga.js"></script>
+    <script type="module" defer>
+      const params = new URL(location).searchParams;
+      if (!params.has("waluta")) {
+        window.location.href = "../";
+      }
+      import { RequestsNBP } from "../nbp.js";
+      const currencyCode = params.get("waluta");
+      const topCount = params.get("top") || 9;
+      document.title = `${currencyCode}/PLN - kurs`;
+
+      (async () => {
+        const requestsNBP = new RequestsNBP();
+        const currency = await requestsNBP.getLastRates(currencyCode, topCount);
+        const rates = currency.rates.reverse();
+        const lastRate = rates[0];
+        const changeColor =
+          rates[0].mid > rates[1].mid
+            ? "rgba(20, 185, 20, 1.0)"
+            : rates[0].mid < rates[1].mid
+            ? "rgba(235, 50, 50, 1.0)"
+            : "rgba(54, 162, 235, 1.0)";
+
+        const flagCode = currencyCode.toLowerCase().substring(0, 2);
+
+        document.querySelector(
+          "#currency-heading"
+        ).innerHTML = `Kurs <span class="para">${currencyCode}/PLN</span>`;
+
+        document.querySelector(
+          "#currency-subheading"
+        ).innerHTML = `<flaga-kraju kraj="${flagCode}"></flaga-kraju> ${currency.currency}`;
+
+        document.querySelector(
+          "#currency-rate"
+        ).innerHTML = `${lastRate.mid} zł`;
+
+        document.querySelector("#currency-rate").style.color = changeColor;
+
+        const allCurrencies = (await requestsNBP.getLastTables())[0].rates;
+        allCurrencies.forEach(({ currency, code }) => {
+          const flagCode = code.toLowerCase().substring(0, 2);
+          const row = document.createElement("a");
+          row.href = `?waluta=${code}`;
+          row.classList.add("kursAnchor");
+          row.innerHTML = `
+          <div class='item'><div class='flaga'><flaga-kraju kraj="${flagCode}"></flaga-kraju></div> <div class='nazwa'>${currency}<div class='small'>${code}</div></div></div>
+            `;
+          document.querySelector("#other-charts").appendChild(row);
+        });
+
+        let ctx = document.querySelector("#wykresWaluty").getContext("2d");
+
+        let wykres = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: rates.map((rate) => rate.effectiveDate),
+            datasets: [
+              {
+                label: `kurs ${currencyCode}/PLN`,
+                data: rates.map((rate) => rate.mid),
+                backgroundColor: ["rgba(255,255,255,0.2)"],
+                borderColor: [changeColor],
+                borderWidth: 3,
+              },
+            ],
+          },
+          options: {},
+        });
+      })();
+    </script>
+  </head>
+  <body>
+    <nav>
+      <a href="../">
+        <div class="logo">
+          <span class="material-icons-round"> account_balance </span>
+          Kantorek
+        </div>
+      </a>
+      <div class="options">
+        <div class="menuOption">
+          <a class="menuItem" href="../kalkulator">
+            <span class="material-icons-round nav-icon">calculate</span>
+            Kalkulator walut</a
+          >
+        </div>
+        <div class="menuOption archiwum">
+          <a class="menuItem" href="../archiwum">
+            <span class="material-icons-round nav-icon">event</span>
+            Archiwum kursów</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="inner-container">
+        <div class="left">
+          <div class="kurs">
+            <h1 id="currency-heading"></h1>
+            <h2 id="currency-subheading"></h2>
+            <h1 id="currency-rate"></h1>
+            <div class="wykresContainer">
+              <canvas id="wykresWaluty" width="100" height="100"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="right">
+          <h2>Sprawdź inne wykresy</h2>
+          <div id="other-charts" class="scrollable"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

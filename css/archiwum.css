@@ -10,12 +10,14 @@
   transition: width 0.5s;
   justify-content: space-around;
 }
+
 .content {
   display: flex;
   flex-direction: row;
   width: 100%;
   height: 100%;
 }
+
 .center {
   text-align: center;
 }
@@ -44,22 +46,31 @@
   justify-content: center;
 }
 
+.flex {
+  display: flex;
+  gap: 10px;
+}
+
 ul {
   padding: 0;
 }
-.kursAnchor:hover > .item {
+
+.kursAnchor:hover>.item {
   transform: translateX(-20px);
 }
+
 .nazwa {
   font-size: 16px;
   margin-left: 20px;
   font-weight: 400;
   text-align: right;
 }
+
 .small {
   font-size: 14px;
   font-weight: 300;
 }
+
 .pickers {
   width: 60%;
   display: flex;
@@ -112,10 +123,12 @@ ul {
 form {
   display: contents;
 }
-input:checked + label {
+
+input:checked+label {
   background-color: rgb(14, 147, 255);
   color: #fff;
 }
+
 input[type="radio"] {
   display: block;
   appearance: none;
@@ -129,6 +142,7 @@ input[type="radio"] {
     width: 100%;
     height: 100%;
   }
+
   .outputBox {
     width: 100%;
   }
@@ -142,6 +156,7 @@ input[type="radio"] {
     padding: 10px;
   }
 }
+
 .none {
   display: none;
 }

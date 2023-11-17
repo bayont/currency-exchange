@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Archiwum kursów</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/archiwum.css" />
+    <link rel="stylesheet" href="../css/nav.css" />
+    <script type="module" src="../flaga/flaga.js"></script>
+    <script> let checkRate = () => {console.log('checkRate')};</script>
+    <script type="module" defer>
+        import { RequestsNBP } from "../nbp.js";
+        const requestsNBP = new RequestsNBP();
+        document.querySelector('#date').max = new Date().toISOString().split("T")[0];
+        (async ()=> {
+            const tables = await requestsNBP.getLastTables();
+            const rates = tables[0].rates;
+
+            console.log(rates);
+            for(const rate of rates) {
+                document.querySelector('#currencies-list').innerHTML += `<li class='inputContainer'>
+                            <input type='radio' onclick='checkRate()' name='waluta' id='${rate.code}' value='${rate.code}'>
+                            <label class='dateLabel item' for='${rate.code}'>
+                                <div class='flaga'><flaga-kraju kraj="${rate.code.toLowerCase().substring(0,2)}"></flaga-kraju></div> 
+                                <div class='nazwa'>
+                                    ${rate.currency}
+                                    <div class='small'>${rate.code}</div>
+                                </div>
+                            </label>
+                        </li>`
+            }
+
+            checkRate = async () => {
+                const date = document.querySelector('#date').value;
+                const currencyChecked = document.querySelector('input[name="waluta"]:checked').value;
+                if(!date || !currencyChecked) {
+                    return
+                }
+
+                let currency;
+                try {
+                currency = (await requestsNBP.getRate(currencyChecked, date));
+                }
+                catch(ex) {
+                    document.querySelector('#queried-currency').innerHTML = `<h2>NBP w tym dniu nie notował wybranej waluty</h2>`;
+                }
+                const rates = currency.rates[0];
+                document.querySelector('#queried-currency').innerHTML = `
+                <h1>
+                    Kurs 
+                    ${currency.currency}
+                    
+                </h1>
+                <div class="flex">
+                    <div class="flaga"> 
+                            <flaga-kraju kraj=${currency.code.toLowerCase().substring(0,2)}></flaga-kraju>
+                    </div>
+
+                    <div class='small'>
+                        ${currency.code}
+                    </div>
+                </div>
+                <h2> w dniu ${date} wynosił</h2>
+                <h1> ${rates.mid} zł</h1>
+
+                `
+            }
+        })();
+
+        
+    </script>
+  </head>
+  <body>
+    <nav>
+        <a href="../">
+          <div class="logo">
+            <span class="material-icons-round"> account_balance </span>
+            Kantorek
+          </div>
+        </a>
+        <div class="options">
+          <div class="menuOption">
+            <a class="menuItem" href="../kalkulator">
+              <span class="material-icons-round nav-icon">calculate</span>
+              Kalkulator walut</a
+            >
+          </div>
+          <div class="menuOption archiwum">
+            <a class="menuItem" href="../archiwum">
+              <span class="material-icons-round nav-icon">event</span>
+              Archiwum kursów</a
+            >
+          </div>
+        </div>
+      </nav>
+
+
+      <div class="container">
+        <div class="inner-container">
+            <h2>Wybierz datę i walutę</h2>
+            <div class="content">
+            <div class="outputBox">
+                <input type="date" name="date" id="date" onchange="checkRate()">
+                <div id="queried-currency">
+                    
+                </div>
+            </div>
+            <div class="pickers">
+                <form id='sender' action="" method="GET">
+                <div class="currencyPicker picker scrollable" >
+                    <ul id="currencies-list">
+
+                    </ul>
+                </div>
+                </form>
+            </div>
+            </div>
+            </div>
+            </div>
+        </div>
+  </body>
+</html>

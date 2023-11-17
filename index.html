@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kantorek - Fabian Fetter</title>
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="./css/global.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/nav.css">
+    <script defer src="./flaga/flaga.js"></script>
+  <script type="module" defer>
+    import { RequestsNBP } from "./nbp.js";
+    const requestsNBP = new RequestsNBP();
+    (async () => {
+      const tables = (await requestsNBP.getLastTables(2));
+      document.querySelector("#table-date").innerHTML = tables[1].effectiveDate;
+      
+      const rates = tables[1].rates;
+      const lastRates = tables[0].rates;
+      const tableElement = document.querySelector("#rates-table");
+      let idx =0;
+      for(const rate of rates) {
+        let mnoznik = 1;
+        let kurs = rate.mid;
+        while(kurs < 0.1) {
+            kurs *= 10;
+            mnoznik *= 10;
+        }
+
+        kurs = kurs.toFixed(2);
+        const nominal = `${mnoznik} ${rate.code}`;
+        const zmiana = ((rate.mid - lastRates[idx].mid) / lastRates[idx].mid * 100).toFixed(2);
+        const klasaZmiany = zmiana > 0 ? "change-up" : zmiana < 0 ? "change-down" : "unchanged";
+        const arrow = zmiana > 0 ? "keyboard_arrow_up" : zmiana < 0 ? "keyboard_arrow_down" : "remove";
+
+        const row = document.createElement("tr");
+        const countryFlagCode = rate.code.toLowerCase().substring(0,2);
+        row.innerHTML = `
+        <td class='lp'>${idx+1}</td>
+        <td class='icons'><flaga-kraju kraj="${countryFlagCode}"></flaga-kraju></td>
+        <td class='align-left nazwa'><a href="kurs/?waluta=${rate.code}">${rate.currency}</a></td>
+        <td class='align-right'><a href="kurs/?waluta=${rate.code}"><div class="nominal">${nominal}</div></a></td>
+        <td class='align-right kurs'>${kurs} zł</td>
+        <td class='align-right'><div class='zmiana ${klasaZmiany}'><span class='md-18 material-icons-round arrow'>${arrow}</span>${zmiana}%</div></td>
+        `
+        tableElement.appendChild(row);
+        idx++;
+      }
+
+    })();
+  </script>
+  </head>
+  <body>
+    <nav>
+      <a href="/">
+      <div class="logo">
+      <span class="material-icons-round">
+      account_balance
+      </span>
+        Kantorek
+      </div>
+      </a>
+      <div class="options">
+      <div class="menuOption">
+      <a class="menuItem" href="kalkulator">
+      <span class="material-icons-round nav-icon">calculate</span>  
+      Kalkulator walut</a>
+      </div>
+      <div class="menuOption archiwum">
+      <a class="menuItem" href="archiwum">
+      <span class="material-icons-round nav-icon">event</span>
+      Archiwum kursów</a>
+      </div>
+      </div>
+    </nav>
+
+    <div class="container">
+
+    <header>
+        <h1>Aktualne kursy</h1>
+        <h5> <span class="md-18 material-icons-round">
+      today
+      </span> <span class="data" id="table-date"></span><span class="tabela"><?php echo $tabela; ?></span></h5>
+    </header>
+    <section class="tableContainer">
+    <table id="rates-table">
+        <tr>
+            <th class='lp'>#</th>
+            <th class='icons'></th> 
+            <th class='align-left'>Nazwa waluty<div class="small">(państwo)</div></th>
+            
+            <th class='align-right'>Nominał <div class="small">Kliknij, aby pokazać wykres</div></th>
+            <th class='align-right'>Kurs</th>
+            <th class='align-right change'>Zmiana (%)</th>
+            
+        </tr>
+        </table>
+        
+        </div>
+        <footer></footer>
+  </body>
+</html>

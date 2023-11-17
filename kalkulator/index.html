@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalkulator</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+    <script type="module" src="../flaga/flaga.js"></script>
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/kalkulator.css" />
+    <link rel="stylesheet" href="../css/nav.css" />
+    <script>
+      let reCalculate = () => {};
+    </script>
+    <script type="module" defer>
+      import { RequestsNBP } from "../nbp.js";
+      const requestsNBP = new RequestsNBP();
+      let rates = [];
+      (async () => {
+        const tables = await requestsNBP.getLastTables();
+
+        rates = tables[0].rates;
+
+        const plnRate = {
+          currency: "polski złoty",
+          code: "PLN",
+          mid: 1,
+        };
+        rates.unshift(plnRate);
+
+        for (const rate of rates) {
+          document
+            .querySelector("#walutaA")
+            .appendChild(
+              new Option(`${rate.code} | ${rate.currency}`, rate.code)
+            );
+          document
+            .querySelector("#walutaB")
+            .appendChild(
+              new Option(`${rate.code} | ${rate.currency}`, rate.code)
+            );
+          document.querySelector("#walutaB").value = "USD";
+        }
+      })();
+
+      reCalculate = (event) => {
+        event.preventDefault();
+        const codeA =
+          document.querySelector("#walutaA").selectedOptions[0].value;
+        const codeB =
+          document.querySelector("#walutaB").selectedOptions[0].value;
+
+        const rateA = rates.find((rate) => rate.code === codeA);
+        const rateB = rates.find((rate) => rate.code === codeB);
+
+        const valueA = +document.querySelector("#walutaAValue").value;
+        const valueB = (valueA * rateA.mid) / rateB.mid;
+
+        document.querySelector("#kurs").innerHTML = `${rateB.mid} ${rateA.code}/${rateB.code}`;
+
+        document.querySelector("#walutaBView").innerHTML = `${valueB.toFixed(
+          2
+        )} ${rateB.code}`;
+        document.querySelector("#walutaAView").innerHTML = `${valueA.toFixed(
+          2
+        )} ${rateA.code}`;
+
+        document.querySelector(
+          "#flagaA"
+        ).innerHTML = `<flaga-kraju kraj="${rateA.code
+          .toLowerCase()
+          .substring(0, 2)}"></flaga-kraju>`;
+
+        document.querySelector(
+          "#flagaB"
+        ).innerHTML = `<flaga-kraju kraj="${rateB.code
+          .toLowerCase()
+          .substring(0, 2)}"></flaga-kraju>`;
+        document.querySelector("#kalkulator").style.opacity = 1;
+        document.querySelector("#kalkulator").style.animation = 'show 1s ease, gradient 15s ease infinite';
+
+
+      };
+    </script>
+  </head>
+  <body>
+    <nav>
+      <a href="../">
+        <div class="logo">
+          <span class="material-icons-round"> account_balance </span>
+          Kantorek
+        </div>
+      </a>
+      <div class="options">
+        <div class="menuOption">
+          <a class="menuItem" href="./">
+            <span class="material-icons-round nav-icon">calculate</span>
+            Kalkulator walut</a
+          >
+        </div>
+        <div class="menuOption archiwum">
+          <a class="menuItem" href="../archiwum">
+            <span class="material-icons-round nav-icon">event</span>
+            Archiwum kursów</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="inner-container">
+        <div class="left">
+          <h2>Kalkulator walut</h2>
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            enable-background="new 0 0 20 20"
+            height="48px"
+            viewBox="0 0 20 20"
+            width="48px"
+            fill="#FFFFFF"
+          >
+            <defs>
+              <clipPath id="svgPath">
+                <path
+                  d="M15,4H5C4.45,4,4,4.45,4,5v10c0,0.55,0.45,1,1,1h10c0.55,0,1-0.45,1-1V5C16,4.45,15.55,4,15,4z M6.5,7.27h2 c0.28,0,0.5,0.22,0.5,0.5v0c0,0.28-0.22,0.5-0.5,0.5h-2C6.22,8.27,6,8.04,6,7.77v0C6,7.49,6.22,7.27,6.5,7.27z M9.5,12.5h-1v1 C8.5,13.78,8.28,14,8,14h0c-0.28,0-0.5-0.22-0.5-0.5v-1h-1C6.22,12.5,6,12.28,6,12v0c0-0.28,0.22-0.5,0.5-0.5h1v-1 C7.5,10.22,7.72,10,8,10h0c0.28,0,0.5,0.22,0.5,0.5v1h1c0.28,0,0.5,0.22,0.5,0.5v0C10,12.28,9.78,12.5,9.5,12.5z M13.5,13.25h-2 c-0.28,0-0.5-0.22-0.5-0.5v0c0-0.28,0.22-0.5,0.5-0.5h2c0.28,0,0.5,0.22,0.5,0.5v0C14,13.03,13.78,13.25,13.5,13.25z M13.5,11.75 h-2c-0.28,0-0.5-0.22-0.5-0.5v0c0-0.28,0.22-0.5,0.5-0.5h2c0.28,0,0.5,0.22,0.5,0.5v0C14,11.53,13.78,11.75,13.5,11.75z M13.91,9.18L13.91,9.18c-0.2,0.2-0.51,0.2-0.71,0L12.5,8.47l-0.71,0.71c-0.2,0.2-0.51,0.2-0.71,0l0,0c-0.2-0.2-0.2-0.51,0-0.71 l0.71-0.71l-0.71-0.71c-0.2-0.2-0.2-0.51,0-0.71v0c0.2-0.2,0.51-0.2,0.71,0l0.71,0.71l0.71-0.71c0.2-0.2,0.51-0.2,0.71,0v0 c0.2,0.2,0.2,0.51,0,0.71l-0.71,0.71l0.71,0.71C14.11,8.67,14.11,8.99,13.91,9.18z"
+                  transform="scale(15.0)"
+                />
+              </clipPath>
+            </defs>
+          </svg>
+
+          <form class="formContainer" onsubmit="return reCalculate(event)">
+            <div class="flex">
+              <div class="label">Mam walutę:</div>
+              <select name="walutaA" id="walutaA"></select>
+            </div>
+
+            <div class="flex">
+              <div class="label">chcę przeliczyć Na:</div>
+              <select name="walutaB" id="walutaB"></select>
+            </div>
+            <div class="flex">
+              <span class="fontSize"
+                >Wprowadź ilość<span id="walutaSpan"></span>:</span
+              ><input
+                type="number"
+                name="wartosc"
+                id="walutaAValue"
+                required
+                step="0.01"
+                min="0.00"
+              />
+            </div>
+            <input type="submit" value="Przelicz"></input>
+          </form>
+        </div>
+
+        <div class="right">
+          <div class="kalkulator-wrapper" id="kalkulator" style="opacity: 0;">
+            <div class="heading">
+              Kalkulator walut
+              <div class="small kurs" id="kurs"></div>
+            </div>
+            <div class="kalkulator-content">
+              <div class="flaga" id="flagaA"></div>
+              <div class="walutaA" id="walutaAView"></div>
+              <div class="equals">=</div>
+              <div class="walutaB" id="walutaBView"></div>
+              <div class="flaga" id="flagaB"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

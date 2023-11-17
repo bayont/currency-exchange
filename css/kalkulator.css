@@ -12,11 +12,16 @@
   justify-content: space-around;
 }
 
+input[type=submit] {
+  cursor: pointer;
+}
+
 .inner-container .left {
   display: flex;
   flex-direction: column;
   width: 50%;
 }
+
 .inner-container .right {
   width: 50%;
   display: flex;
@@ -34,6 +39,7 @@
 
   margin: 20px 0;
 }
+
 .label,
 .fontSize {
   font-size: 13px;
@@ -41,6 +47,7 @@
   font-weight: 600;
   margin-bottom: 5px;
 }
+
 select,
 input,
 option {
@@ -58,7 +65,6 @@ option {
   color: #fefefe;
   background: linear-gradient(-45deg, #ee7752, #f74949, #23a6d5, #23d5ab);
   background-size: 400% 400%;
-  animation: show 1s ease, gradient 15s ease infinite;
   border-radius: 15px;
   padding: 10px;
   padding-top: 20px;
@@ -70,9 +76,11 @@ option {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -102,12 +110,14 @@ option {
   display: inline-block;
   margin-right: 5px;
 }
+
 .small.kurs {
   font-size: 13px;
   font-weight: 400;
   text-align: left;
   font-style: italic;
 }
+
 .kalkulator-content {
   position: absolute;
   display: flex;
@@ -121,6 +131,7 @@ option {
   left: 0;
   font-size: 24px;
 }
+
 .equals {
   transform: rotate(90deg) scaleX(1.5);
 }
@@ -146,6 +157,7 @@ option {
     width: 90%;
     padding: 10px;
   }
+
   .fontSize {
     font-size: 14px;
   }
